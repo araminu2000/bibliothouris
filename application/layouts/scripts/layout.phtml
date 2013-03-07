@@ -1,0 +1,27 @@
+<?php echo $this->doctype()?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle(); ?>
+    	<?php echo $this->headLink(); ?>
+    	<?php echo $this->headScript(); ?>
+    	<?php echo $this->headStyle(); ?>
+    </head>
+
+    <body>
+        <div id="holderBody">
+
+        	<!-- Container for messages -->
+            <div id="dialogAppMessage"></div>
+
+            <!-- General dialog container -->
+            <div id="dialog"></div>
+
+            <?php echo $this->partial('partial/main-menu.phtml'); ?>
+            Layout
+	    <?php echo $this->layout()->content?>
+        </div>
+    </body>
+
+</html>
