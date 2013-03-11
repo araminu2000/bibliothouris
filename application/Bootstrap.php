@@ -44,7 +44,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink()->appendStylesheet('/common/jquery-ui/css/custom-theme/jquery-ui-1.10.1.custom.css');
 
         // jquery / jquery UI
-        $view->headScript()->prependFile('/common/jquery-ui/js/jquery-1.9.1.js');
+        $view->headScript()->appendFile('/common/jquery-ui/js/jquery-1.9.1.js');
         $view->headScript()->appendFile('/common/jquery-ui/js/jquery-ui-1.10.1.custom.min.js');
 
         // datatable CSS
