@@ -3,7 +3,7 @@
 -- Server version:               5.5.24-log - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-03-07 17:59:02
+-- Date/time:                    2013-03-08 16:09:42
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -23,6 +23,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `date_end` date DEFAULT '0000-00-00',
   `trainer_name` varchar(50) NOT NULL DEFAULT '',
   `content` text NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `trainer_name` (`trainer_name`),
   KEY `title` (`title`)
@@ -41,24 +44,16 @@ CREATE TABLE IF NOT EXISTS `members` (
   `email` varchar(50) NOT NULL DEFAULT '',
   `password` varchar(32) NOT NULL DEFAULT '',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `created` timestamp NULL DEFAULT '0000-00-00 00:00:00',
-  `modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fname` (`fname`),
   KEY `lname` (`lname`),
   KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table bibliothouris.members: ~1 rows (approximately)
+-- Dumping data for table bibliothouris.members: ~3 rows (approximately)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` (`id`, `fname`, `lname`, `email`, `password`, `status`, `created`, `modified`) VALUES
-	(1, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(2, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(3, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(4, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(5, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(6, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47'),
-	(7, 'Marius', 'Anghel', 'araminu2000@yahoo.com', '1', 1, '0000-00-00 00:00:00', '2013-03-07 14:38:47');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 /*!40014 SET FOREIGN_KEY_CHECKS=1 */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

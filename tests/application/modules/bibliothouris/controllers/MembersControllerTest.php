@@ -1,6 +1,6 @@
 <?php
 
-class Bibliothouris_CoursesControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+class Bibliothouris_MembersControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
 
     public function setUp()
@@ -24,62 +24,62 @@ class Bibliothouris_CoursesControllerTest extends Zend_Test_PHPUnit_ControllerTe
         $this->assertAction('error');
     }
 
-    public function testRoutingCoursesControllerOnIndexAction(){
-        $url = '/bibliothouris/courses/index/';
+    public function testRoutingMembersControllerOnIndexAction(){
+        $url = '/bibliothouris/members/index/';
         $this->dispatch($url);
 
         $this->assertModule('bibliothouris');
-        $this->assertController('courses');
+        $this->assertController('members');
         $this->assertAction('list');
     }
 
-    public function testRoutingCoursesControllerOnIndexActionIfActionNotSet(){
-        $url = '/bibliothouris/courses/';
+    public function testRoutingMembersControllerOnIndexActionIfActionNotSet(){
+        $url = '/bibliothouris/members/';
         $this->dispatch($url);
 
         $this->assertModule('bibliothouris');
-        $this->assertController('courses');
+        $this->assertController('members');
         $this->assertAction('list');
     }
 
-    public function testRoutingCoursesControllerOnLoginAction(){
-        $url = '/bibliothouris/courses/register/';
+    public function testRoutingMembersControllerOnLoginAction(){
+        $url = '/bibliothouris/members/register/';
         $this->dispatch($url);
 
         $this->assertModule('bibliothouris');
-        $this->assertController('courses');
+        $this->assertController('members');
         $this->assertAction('register');
     }
 
     public function testIfLoginPageContainsLoginForm(){
-        $url = '/bibliothouris/courses/register/';
+        $url = '/bibliothouris/members/register/';
         $this->dispatch($url);
 
         $this->assertQueryCount('form#registerForm', 1);
     }
 
     public function testIfLoginPageContainsRightTitle(){
-        $url = '/bibliothouris/courses/register/';
+        $url = '/bibliothouris/members/register/';
         $this->dispatch($url);
 
-        $this->assertQueryContentContains('div.page-title', 'Register a new course');
+        $this->assertQueryContentContains('div.page-title', 'Register a new member');
     }
 
-    public function testIfAjaxInfoAreCorrectForListingCourses(){
-        $url = '/bibliothouris/courses/ajax-list-courses/';
+    public function testIfAjaxInfoAreCorrectForListingMembers(){
+        $url = '/bibliothouris/members/ajax-list-members/';
         $this->dispatch($url);
 
 
-        $coursesMapper = new Bibliothouris_Model_CoursesMapper();
-        $courses = $coursesMapper->fetchAll();
-        $coursesArray = array();
-        foreach($courses as $course) {
-            $coursesArray[] = $course->getFname() . ' ' . $course->getLname();
+        $membersMapper = new Bibliothouris_Model_MembersMapper();
+        $members = $membersMapper->fetchAll();
+        $membersArray = array();
+        foreach($members as $member) {
+            $membersArray[] = $member->getFname() . ' ' . $member->getLname();
         }
 
         $httpResponse = $this->getResponse();
 
-        $this->assertEquals($httpResponse->getBody(),Zend_Json::encode($coursesArray));
+        $this->assertEquals($httpResponse->getBody(),Zend_Json::encode($membersArray));
         $this->assertHeaderContains('Content-Type', 'application/json');
         $this->assertResponseCode(200, null);
     }

@@ -1,7 +1,8 @@
 <?php
 
-class Default_IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+class Bibliothouris_IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
+
 
     public function setUp()
     {
