@@ -29,6 +29,7 @@ class Bibliothouris_CoursesController extends Zend_Controller_Action {
             $registerCourseForm->populate($this->getRequest()->getPost());
         }
 
+        $registerCourseForm->setPrevalidation();
         $this->view->registerCourseForm = $registerCourseForm;
     }
 

@@ -17,7 +17,8 @@ class Bibliothouris_Form_RegisterMember extends Zend_Form {
                     'options' => array(1, 50),
 
                 )
-            ));
+            ))
+            ->removeDecorator('Errors');
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Text('lname');
@@ -31,7 +32,8 @@ class Bibliothouris_Form_RegisterMember extends Zend_Form {
                     'options' => array(1, 50),
 
                 )
-            ));
+            ))
+            ->removeDecorator('Errors');
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Text('email');
@@ -39,12 +41,14 @@ class Bibliothouris_Form_RegisterMember extends Zend_Form {
             ->setAttrib('class', 'fieldsClass')
             ->setAttrib('maxlength', 50)
             ->setRequired(true)
+            ->setAttrib('autocomplete', 'off')
             ->setValidators(array(
                     array(
                         'validator' => 'EmailAddress',
                     )
                 ))
-            ->addValidator(new Bibliothouris_Validate_EmailAddressUnique());
+            ->addValidator(new Bibliothouris_Validate_EmailAddressUnique())
+            ->removeDecorator('Errors');
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Password('password');
@@ -52,13 +56,15 @@ class Bibliothouris_Form_RegisterMember extends Zend_Form {
             ->setAttrib('class', 'fieldsClass')
             ->setAttrib('maxlength', 50)
             ->setRequired(true)
+            ->setAttrib('autocomplete', 'off')
             ->setValidators(array(
                 array(
                     'validator' => 'StringLength',
                     'options' => array(6, 32),
 
                 )
-            ));
+            ))
+            ->removeDecorator('Errors');
         $this->addElement($element);
 
         $element = new Zend_Form_Element_Submit('registerMemberSbt');
@@ -72,6 +78,20 @@ class Bibliothouris_Form_RegisterMember extends Zend_Form {
             ->setAttrib('onclick', 'location.href=\'/bibliothouris/members/index\'');;
         $this->addElement($element);
     }
+
+    public function setPrevalidation() {
+        $request = Zend_Controller_Front::getInstance()->getRequest()->getPost();
+        if(!empty($request)){
+            $this->isValid($request);
+        }
+        $errFields = array_keys($this->getMessages());
+        foreach($errFields as $errField){
+            $element =$this->getElement($errField);
+            if(!empty($element)){
+                $element->setAttrib('class', $element->getAttrib('class') . ' errorField');
+            }
+        }
+    }
 }
 
 class Bibliothouris_Validate_EmailAddressUnique extends Zend_Validate_Abstract {
@@ -84,7 +104,7 @@ class Bibliothouris_Validate_EmailAddressUnique extends Zend_Validate_Abstract {
 
     public function isValid($value, $context = null) {
         $membersMapper = new Bibliothouris_Model_MembersMapper();
-        $memberCount = $membersMapper->countByQuery('email=\''.mysql_real_escape_string($value).'\'');
+        $memberCount = $membersMapper->countByQuery('email=\''.$value.'\'');
 
         if($memberCount > 0){
             $this->_error(self::USED);

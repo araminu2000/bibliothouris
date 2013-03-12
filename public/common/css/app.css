@@ -170,3 +170,22 @@ div.forms dd  {
     font-weight: 800;
     color:#cd0a0a;
 }
+/* Register Course Form modification ( increased witdth/ height ) */
+
+#course-register {
+    width: 480px;
+}
+
+#course-register .fieldsClass  {
+    width: 300px;
+}
+
+#course-register .textAreaContents {
+    width: 299px;
+    height: 150px;
+}
+/* Added error field hightlight */
+.errorField {
+    background-color: #EE5757;
+    borderolid 1px #CCCCC;
+}

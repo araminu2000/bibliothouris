@@ -21,6 +21,7 @@ class Bibliothouris_MembersController extends Zend_Controller_Action {
             $registerMemberForm->populate($this->getRequest()->getPost());
         }
 
+        $registerMemberForm->setPrevalidation();
         $this->view->registerMemberForm = $registerMemberForm;
     }
 
