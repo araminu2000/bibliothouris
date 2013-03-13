@@ -34,9 +34,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $view->strictVars();
 
-        // QUnit CSS
-        $view->headLink()->appendStylesheet('/common/qunit/qunit.css');
-
         // Main Application CSS
         $view->headLink()->appendStylesheet('/common/css/app.css');
 
@@ -56,24 +53,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // application JS
         $view->headScript()->appendFile('/common/js/app.js');
-
-        if("development" == APPLICATION_ENV) {
-
-            // Qunit JS
-            $view->headScript()->appendFile('/common/qunit/qunit.js');
-
-            // Qunit JS Tests File
-            $oRequest   = new Zend_Controller_Request_Http();
-            $jsTestFile = '/common/jstests/' . str_replace("/", "-", trim($oRequest->getRequestUri(), '/')) . '.js';
-
-            if (file_exists(APPLICATION_PATH . '../../public' . $jsTestFile)) {
-                $view->headScript()->appendFile($jsTestFile);
-            }
-
-            $view->headScript()->appendFile('/common/jstests/global-tests.js');
-
-        }
-
 
         $view->headTitle()->setSeparator(' - ');
     }
